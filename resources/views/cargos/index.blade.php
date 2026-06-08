@@ -92,7 +92,7 @@
     </div>
 
     <!-- Vista desktop: tabla -->
-    <div class="hidden md:block bg-white rounded-2xl shadow-lg overflow-hidden">
+    <div class="hidden md:block bg-white rounded-2xl shadow-lg overflow-visible">
         <table class="min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
                 <tr>
