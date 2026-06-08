@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - Sistema de Gestión de Actividades</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <div class="text-center mb-8">
@@ -13,14 +15,22 @@
             <p class="text-gray-600">Gestión de Actividades</p>
         </div>
 
+        <div class="mt-4 text-center">
+            <p class="text-sm text-gray-600">¿No tienes cuenta?
+                <a href="<?php echo e(route('register')); ?>" class="text-blue-600 hover:text-blue-800 font-medium">
+                    Regístrate aquí
+                </a>
+            </p>
+        </div>
+
         <form method="POST" action="<?php echo e(route('login')); ?>">
             <?php echo csrf_field(); ?>
 
             <?php if($errors->any()): ?>
-                <div class="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
-                    <?php echo e($errors->first('username')); ?>
+            <div class="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
+                <?php echo e($errors->first('username')); ?>
 
-                </div>
+            </div>
             <?php endif; ?>
 
             <div class="mb-4">
@@ -56,5 +66,5 @@
         </div>
     </div>
 </body>
-</html>
-<?php /**PATH C:\xampp\htdocs\sistemaIglesia\sistemaIglesia\resources\views/auth/login.blade.php ENDPATH**/ ?>
+
+</html><?php /**PATH C:\xampp\htdocs\sistemaIglesia\sistemaIglesia\resources\views/auth/login.blade.php ENDPATH**/ ?>
