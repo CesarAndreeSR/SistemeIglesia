@@ -9,7 +9,7 @@
             <div class="flex items-center gap-3 md:gap-4">
                 <div class="bg-white/20 p-2.5 md:p-3 rounded-xl backdrop-blur-sm shrink-0">
                     <svg class="w-6 h-6 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                     </svg>
                 </div>
                 <div>
@@ -20,13 +20,22 @@
             <a href="<?php echo e(route('users.create')); ?>"
                 class="bg-white/20 hover:bg-white/30 active:bg-white/40 text-white px-4 md:px-6 py-2.5 md:py-3 rounded-xl backdrop-blur-sm transition-all duration-200 flex items-center gap-2 text-sm md:text-base font-medium">
                 <svg class="w-4 h-4 md:w-5 md:h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                 </svg>
                 <span class="hidden sm:inline">Nuevo Usuario</span>
                 <span class="sm:hidden">Nuevo</span>
             </a>
         </div>
     </div>
+    <?php if(session('success')): ?>
+    <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-xl flex items-center gap-2 text-sm">
+        <svg class="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+        </svg>
+        <?php echo e(session('success')); ?>
+
+    </div>
+    <?php endif; ?>
 
     <!-- Vista móvil: tarjetas -->
     <div class="md:hidden space-y-3">
@@ -41,9 +50,10 @@
                     </div>
                     <div class="min-w-0">
                         <p class="font-semibold text-gray-900 text-sm truncate"><?php echo e($user->name); ?></p>
-                        <p class="text-xs text-blue-600 truncate">{{ $user->username ?? '-' }}</p>
+
+                        <p class="text-xs text-blue-600 truncate"><?php echo e($user->username ?? '-'); ?></p>
                         <?php if($user->email): ?>
-                            <p class="text-xs text-gray-400 truncate"><?php echo e($user->email); ?></p>
+                        <p class="text-xs text-gray-400 truncate"><?php echo e($user->email); ?></p>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -60,7 +70,7 @@
             <?php if($user->cargo): ?>
             <div class="mt-3 flex items-center gap-1.5 text-xs text-gray-500">
                 <svg class="w-3.5 h-3.5 text-emerald-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
                 <?php echo e($user->cargo->nombre); ?>
 
@@ -101,7 +111,7 @@
         <?php if($users->isEmpty()): ?>
         <div class="text-center py-12 bg-white rounded-xl">
             <svg class="w-12 h-12 mx-auto text-gray-300 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
             </svg>
             <p class="text-gray-500 text-sm">No hay usuarios registrados.</p>
         </div>
@@ -154,7 +164,7 @@
                             <button onclick="toggleDropdown('dropdown-user-<?php echo e($user->id); ?>')"
                                 class="p-2 rounded-full hover:bg-gray-100 transition-colors focus:outline-none">
                                 <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
                                 </svg>
                             </button>
                             <div id="dropdown-user-<?php echo e($user->id); ?>"
@@ -163,15 +173,15 @@
                                     <a href="<?php echo e(route('users.show', $user)); ?>"
                                         class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
                                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                         </svg>
                                         Ver
                                     </a>
                                     <a href="<?php echo e(route('users.edit', $user)); ?>"
                                         class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors">
                                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
                                         </svg>
                                         Editar
                                     </a>
@@ -181,7 +191,7 @@
                                         <button type="submit"
                                             class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-yellow-50 hover:text-yellow-600 transition-colors">
                                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z" />
                                             </svg>
                                             <?php echo e($user->estado ? 'Desactivar' : 'Activar'); ?>
 
@@ -193,9 +203,23 @@
                                         <button type="submit"
                                             class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 transition-colors">
                                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                                             </svg>
                                             Eliminar
+                                        </button>
+                                    </form>
+                                    <form action="<?php echo e(route('users.reset-password', $user)); ?>" method="POST" onsubmit="return confirm('¿Cambiar contraseña de este usuario?');">
+                                        <?php echo csrf_field(); ?> <?php echo method_field('PATCH'); ?>
+                                        <button type="button"
+                                            onclick="openModalPassword(<?php echo e($user->id); ?>, '<?php echo e($user->name); ?>', '<?php echo e(route('users.reset-password', $user)); ?>')"
+                                            class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+
+                                            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M12 11c1.657 0 3-1.567 3-3.5S13.657 4 12 4 9 5.567 9 7.5 10.343 11 12 11zM6 20v-1a6 6 0 0112 0v1" />
+                                            </svg>
+
+                                            Contraseña
                                         </button>
                                     </form>
                                 </div>
@@ -215,6 +239,69 @@
             </tbody>
         </table>
     </div>
+    
+    <div id="modalPassword" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-sm animate-fade-in">
+
+            <div class="p-6 border-b border-gray-100">
+                <h3 class="text-lg font-bold text-gray-800">Cambiar Contraseña</h3>
+                <p id="modalUserName" class="text-sm text-gray-500 mt-0.5"></p>
+            </div>
+
+            <form id="formPassword" method="POST" class="p-6 space-y-4">
+                <?php echo csrf_field(); ?>
+                <?php echo method_field('PATCH'); ?>
+
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">
+                        Nueva Contraseña
+                    </label>
+                    <input type="password" name="new_password" required placeholder="••••••••"
+                        class="w-full px-4 py-3.5 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all text-base">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">
+                        Confirmar Contraseña
+                    </label>
+                    <input type="password" name="new_password_confirmation" required placeholder="••••••••"
+                        class="w-full px-4 py-3.5 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all text-base">
+                </div>
+
+                <div class="flex gap-3 pt-2">
+                    <button type="button" onclick="closeModal()"
+                        class="flex-1 py-3 border-2 border-gray-300 rounded-xl text-gray-700 hover:bg-gray-50 transition font-medium text-sm">
+                        Cancelar
+                    </button>
+                    <button type="submit"
+                        class="flex-1 py-3 bg-gradient-to-r from-blue-600 to-indigo-700 text-white rounded-xl hover:from-blue-700 hover:to-indigo-800 transition font-medium text-sm shadow-lg">
+                        Guardar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <?php $__env->startPush('scripts'); ?>
+    <script>
+        function openModalPassword(userId, userName, resetUrl) {
+            document.getElementById('modalUserName').textContent = 'Usuario: ' + userName;
+            document.getElementById('formPassword').action = resetUrl;
+            document.getElementById('modalPassword').classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('modalPassword').classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        // cerrar tocando fuera del modal
+        document.getElementById('modalPassword').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+    </script>
+    <?php $__env->stopPush(); ?>
 
 </div>
 <?php $__env->stopSection(); ?>

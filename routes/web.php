@@ -51,5 +51,6 @@ Route::middleware([
         Route::get('/edit/{actividadId}', [AsistenciaController::class, 'edit'])->name('asistencias.edit');
         Route::put('/{actividadId}', [AsistenciaController::class, 'update'])->name('asistencias.update');
         Route::patch('/toggle/{actividadId}/{userId}', [AsistenciaController::class, 'toggle'])->name('asistencias.toggle');
+        Route::patch('/users/{user}/reset-password', [UserController::class, 'resetPassword'])->name('users.reset-password');
     });
 });
