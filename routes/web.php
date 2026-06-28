@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\CargoController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EvidenciaController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -52,5 +53,14 @@ Route::middleware([
         Route::put('/{actividadId}', [AsistenciaController::class, 'update'])->name('asistencias.update');
         Route::patch('/toggle/{actividadId}/{userId}', [AsistenciaController::class, 'toggle'])->name('asistencias.toggle');
         Route::patch('/users/{user}/reset-password', [UserController::class, 'resetPassword'])->name('users.reset-password');
+    });
+    
+    // Settings Routes
+    Route::prefix('ajustes')->group(function () {
+        Route::get('/', [SettingsController::class, 'index'])->name('settings.index');
+        Route::get('/perfil', [SettingsController::class, 'profile'])->name('settings.profile');
+        Route::post('/perfil', [SettingsController::class, 'updateProfile'])->name('settings.profile.update');
+        Route::get('/contrasena', [SettingsController::class, 'password'])->name('settings.password');
+        Route::post('/contrasena', [SettingsController::class, 'updatePassword'])->name('settings.password.update');
     });
 });

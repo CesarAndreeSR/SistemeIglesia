@@ -6,7 +6,19 @@
     <title>@yield('title', 'Sistema de Gestión de Actividades')</title>
     
     <!-- Favicon -->
-    <link rel="icon" href="{{ asset('images/logo/icon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('images/logo/favicon.ico') }}" type="image/x-icon">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
+    
+    <!-- iOS Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="San Marteen">
+    <link rel="apple-touch-icon" href="{{ asset('images/pwa/icon-192x192.png') }}">
+    
+    <!-- PWA Theme Color -->
+    <meta name="theme-color" content="#C8A26E">
     
     <!-- Poppins Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -82,8 +94,20 @@ document.addEventListener('click', function(event) {
         });
     }
 });
-</script>
 
+// Register Service Worker
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+                console.log('Service Worker registered with scope:', registration.scope);
+            })
+            .catch((error) => {
+                console.error('Service Worker registration failed:', error);
+            });
+    });
+}
+</script>
 
 </body>
 </html>

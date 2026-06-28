@@ -7,7 +7,19 @@
     <title>Registro - Iglesia San Marteen</title>
     
     <!-- Favicon -->
-    <link rel="icon" href="{{ asset('images/logo/icon.ico') }}" type="image/x-icon">
+    <link rel="icon" href="{{ asset('images/logo/favicon.ico') }}" type="image/x-icon">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
+    
+    <!-- iOS Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="San Marteen">
+    <link rel="apple-touch-icon" href="{{ asset('images/pwa/icon-192x192.png') }}">
+    
+    <!-- PWA Theme Color -->
+    <meta name="theme-color" content="#C8A26E">
     
     <!-- Poppins Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -119,6 +131,70 @@
         </p>
 
     </div>
+
+    <!-- Install PWA Button -->
+    <div id="pwa-install-container" class="fixed bottom-4 right-4 z-[9999] hidden">
+        <button id="pwa-install-btn" 
+                class="flex items-center gap-2 bg-gradient-to-r from-[#C8A26E] to-[#A97142] text-white px-5 py-3 rounded-2xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300 font-semibold">
+            <span>📲</span>
+            <span>Instalar aplicación</span>
+        </button>
+    </div>
+
+    <script>
+    // PWA Logic
+    let deferredPrompt;
+    const installContainer = document.getElementById('pwa-install-container');
+    const installBtn = document.getElementById('pwa-install-btn');
+
+    // Listen for beforeinstallprompt event
+    window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        installContainer.classList.remove('hidden');
+        installContainer.classList.add('animate-fade-in');
+    });
+
+    // Handle install button click
+    installBtn.addEventListener('click', async () => {
+        if (!deferredPrompt) {
+            return;
+        }
+        
+        deferredPrompt.prompt();
+        
+        const { outcome } = await deferredPrompt.userChoice;
+        
+        if (outcome === 'accepted') {
+            console.log('User accepted the install prompt');
+            installContainer.classList.add('hidden');
+        } else {
+            console.log('User dismissed the install prompt');
+        }
+        
+        deferredPrompt = null;
+    });
+
+    // Listen for app installed event
+    window.addEventListener('appinstalled', (e) => {
+        console.log('PWA was installed');
+        installContainer.classList.add('hidden');
+        deferredPrompt = null;
+    });
+
+    // Register Service Worker
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+                .then((registration) => {
+                    console.log('Service Worker registered with scope:', registration.scope);
+                })
+                .catch((error) => {
+                    console.error('Service Worker registration failed:', error);
+                });
+        });
+    }
+    </script>
 
 </body>
 
