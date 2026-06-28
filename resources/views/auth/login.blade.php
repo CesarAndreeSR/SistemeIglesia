@@ -4,7 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - San Martin App</title>
+    <title>Login - Iglesia San Marteen</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="{{ asset('images/logo/icon.ico') }}" type="image/x-icon">
+    
+    <!-- Poppins Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @keyframes fadeIn {
@@ -25,21 +32,21 @@
     </style>
 </head>
 
-<body class="bg-gradient-to-br from-blue-900 via-blue-800 to-indigo-900 min-h-screen flex items-center justify-center p-4">
+<body class="bg-gradient-to-br from-[#C8A26E] via-[#E9D8B6] to-[#FAF8F5] min-h-screen flex items-center justify-center p-4 font-['Poppins']">
 
     <div class="w-full max-w-md animate-fade-in">
 
         <!-- Logo / Header -->
         <div class="text-center mb-8">
-            
-            <h1 class="text-3xl font-bold text-white">San Martin App</h1>
-            <p class="text-blue-200 mt-1 text-sm">Gestión de Actividades</p>
+            <img src="{{ asset('images/logo/logo.png') }}" alt="Logo Iglesia San Marteen" class="w-32 h-32 mx-auto mb-4 rounded-2xl shadow-xl">
+            <h1 class="text-3xl font-bold text-[#1F2937]">Iglesia San Marteen</h1>
+            <p class="text-[#A97142] mt-1 text-sm">Sistema de Gestión</p>
         </div>
 
         <!-- Card -->
-        <div class="bg-white rounded-2xl shadow-2xl p-6 md:p-8">
+        <div class="bg-white rounded-2xl shadow-xl p-6 md:p-8 border border-[#E9D8B6]">
 
-            <h2 class="text-xl font-bold text-gray-800 mb-1">Bienvenido</h2>
+            <h2 class="text-xl font-bold text-[#1F2937] mb-1">Bienvenido</h2>
             <p class="text-gray-500 text-sm mb-6">Ingresa tus credenciales para continuar</p>
 
             <!-- Error -->
@@ -57,48 +64,48 @@
 
                 <!-- Usuario -->
                 <div class="mb-5">
-                    <label for="username" class="block text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
-                        <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <label for="username" class="block text-sm font-semibold text-[#1F2937] mb-2 flex items-center gap-2">
+                        <svg class="w-4 h-4 text-[#C8A26E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
                         Nombre de Usuario
                     </label>
                     <input type="text" id="username" name="username" value="{{ old('username') }}" required
                         placeholder="Ej: Cesar"
-                        class="w-full px-4 py-3.5 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all text-base text-gray-900 placeholder-gray-400">
+                        class="w-full px-4 py-3.5 rounded-xl border-2 border-[#E9D8B6] focus:border-[#C8A26E] focus:ring-4 focus:ring-[#E9D8B6] transition-all text-base text-[#1F2937] placeholder-gray-400">
                 </div>
 
                 <!-- Contraseña -->
                 <div class="mb-5">
-                    <label for="password" class="block text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2">
-                        <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <label for="password" class="block text-sm font-semibold text-[#1F2937] mb-2 flex items-center gap-2">
+                        <svg class="w-4 h-4 text-[#C8A26E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                         </svg>
                         Contraseña
                     </label>
                     <input type="password" id="password" name="password" required
                         placeholder="••••••••"
-                        class="w-full px-4 py-3.5 rounded-xl border-2 border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-100 transition-all text-base">
+                        class="w-full px-4 py-3.5 rounded-xl border-2 border-[#E9D8B6] focus:border-[#C8A26E] focus:ring-4 focus:ring-[#E9D8B6] transition-all text-base">
                 </div>
 
                 <!-- Recordarme -->
                 <div class="mb-6">
                     <label class="flex items-center gap-3 cursor-pointer">
                         <input type="checkbox" name="remember"
-                            class="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                            class="h-5 w-5 text-[#C8A26E] focus:ring-[#C8A26E] border-[#E9D8B6] rounded">
                         <span class="text-sm text-gray-600">Recordarme</span>
                     </label>
                 </div>
 
                 <!-- Botón -->
                 <button type="submit"
-                    class="w-full bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-3.5 px-4 rounded-xl hover:from-blue-700 hover:to-indigo-800 active:scale-95 transition-all font-semibold text-sm shadow-lg">
+                    class="w-full bg-gradient-to-r from-[#C8A26E] to-[#A97142] text-white py-3.5 px-4 rounded-xl hover:from-[#A97142] hover:to-[#C8A26E] active:scale-95 transition-all font-semibold text-sm shadow-lg">
                     Iniciar Sesión
                 </button>
                 <!-- Registro -->
                 <div class="mt-4 text-center">
                     <p class="text-sm text-gray-600">¿No tienes cuenta?
-                        <a href="{{ route('register') }}" class="text-blue-600 hover:text-blue-800 font-semibold transition">
+                        <a href="{{ route('register') }}" class="text-[#C8A26E] hover:text-[#A97142] font-semibold transition">
                             Regístrate aquí
                         </a>
                     </p>
@@ -107,18 +114,18 @@
             </form>
 
             <!-- Hint -->
-            <div class="mt-6 p-4 bg-blue-50 rounded-xl">
-                <p class="text-xs text-blue-700 text-center">
+            <div class="mt-6 p-4 bg-[#E9D8B6]/50 rounded-xl">
+                <p class="text-xs text-[#A97142] text-center">
                     Usa tu nombre de usuario para iniciar sesión.<br>
-                    Ejemplo: Si te llamas "Cesar Andreee", usa <strong>Cesar</strong>
+                    Ejemplo: Si te llamas "Cesar Andree", usa <strong>Cesar</strong>
                 </p>
             </div>
 
         </div>
 
         <!-- Footer -->
-        <p class="text-center text-blue-300 text-xs mt-6">
-                Intihawua © {{ date('Y') }}
+        <p class="text-center text-[#A97142] text-xs mt-6">
+                Iglesia San Marteen © {{ date('Y') }}
         </p>
 
     </div>

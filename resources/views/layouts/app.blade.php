@@ -4,10 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Sistema de Gestión de Actividades')</title>
-
+    
+    <!-- Favicon -->
+    <link rel="icon" href="{{ asset('images/logo/icon.ico') }}" type="image/x-icon">
+    
+    <!-- Poppins Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
     <style>
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -20,10 +27,23 @@
             to { opacity: 1; transform: translateX(0); }
         }
         .animate-slide-in { animation: slideIn 0.3s ease-out; }
+        
+        /* Custom color classes */
+        .bg-primary { background-color: #C8A26E; }
+        .bg-primary-dark { background-color: #A97142; }
+        .bg-secondary { background-color: #E9D8B6; }
+        .bg-background { background-color: #FAF8F5; }
+        .text-primary { color: #C8A26E; }
+        .text-primary-dark { color: #A97142; }
+        .text-secondary { color: #E9D8B6; }
+        .border-primary { border-color: #C8A26E; }
+        .hover\:bg-primary:hover { background-color: #C8A26E; }
+        .hover\:bg-primary-dark:hover { background-color: #A97142; }
+        .hover\:bg-secondary:hover { background-color: #E9D8B6; }
     </style>
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-[#FAF8F5] font-['Poppins']">
 
 <div class="flex h-screen overflow-hidden">
     @include('layouts.sidebar')
@@ -31,7 +51,7 @@
     <div class="flex-1 flex flex-col overflow-hidden w-full">
         @include('layouts.header')
 
-        <main class="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-4 md:p-6 relative z-10 animate-fade-in">
+        <main class="flex-1 overflow-x-hidden overflow-y-auto bg-[#FAF8F5] p-4 md:p-6 relative z-10 animate-fade-in">
             @yield('content')
         </main>
     </div>
