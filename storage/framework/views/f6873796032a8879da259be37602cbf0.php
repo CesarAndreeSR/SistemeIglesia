@@ -2,7 +2,7 @@
 
 <?php $__env->startSection('content'); ?>
 <div class="space-y-6 animate-fade-in">
-    <h1 class="text-3xl font-bold text-gray-900">Asistencias por Actividad</h1>
+    <h1 class="text-3xl font-bold text-gray-800">Asistencias por Actividad</h1>
 
     <?php
         $asistenciasPorActividad = $asistencias->groupBy('actividad_id');
@@ -16,18 +16,18 @@
         ?>
 
         <div class="bg-white rounded-xl shadow-lg overflow-hidden">
-            <div class="bg-gradient-to-r from-green-600 to-green-700 px-6 py-4">
+            <div class="bg-gradient-to-r from-[#C8A26E] to-[#A97142] px-6 py-4">
                 <div class="flex items-center justify-between">
                     <div>
                         <h2 class="text-xl font-bold text-white"><?php echo e($actividad->titulo); ?></h2>
-                        <p class="text-green-200 text-sm"><?php echo e($actividad->fecha->format('d/m/Y')); ?> - <?php echo e($actividad->hora); ?></p>
+                        <p class="text-amber-100 text-sm"><?php echo e($actividad->fecha->format('d/m/Y')); ?> - <?php echo e($actividad->hora); ?></p>
                     </div>
                     <div class="flex items-center space-x-4">
                         <div class="text-center">
                             <p class="text-2xl font-bold text-white"><?php echo e($asistentes); ?>/<?php echo e($total); ?></p>
-                            <p class="text-green-200 text-xs">Asistencia</p>
+                            <p class="text-amber-100 text-xs">Asistencia</p>
                         </div>
-                        <a href="<?php echo e(route('actividades.show', $actividad)); ?>" class="bg-white text-green-600 px-4 py-2 rounded-lg hover:bg-green-50 transition-colors font-medium">
+                        <a href="<?php echo e(route('actividades.show', $actividad)); ?>" class="bg-white text-[#A97142] px-4 py-2 rounded-lg hover:bg-amber-50 transition-colors font-medium">
                             Ver Actividad
                         </a>
                     </div>
@@ -37,29 +37,29 @@
             <div class="p-6">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                     <?php $__currentLoopData = $asistenciasGrupo; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $asistencia): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <div class="bg-gray-50 rounded-lg p-4 hover:shadow-md transition-shadow duration-200">
+                        <div class="bg-[#FAF8F5] rounded-lg p-4 hover:shadow-md transition-shadow duration-200">
                             <div class="flex items-center justify-between mb-3">
                                 <div class="flex items-center space-x-3">
-                                    <div class="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold">
+                                    <div class="w-10 h-10 bg-gradient-to-br from-[#C8A26E] to-[#A97142] rounded-full flex items-center justify-center text-white font-bold">
                                         <?php echo e(strtoupper(substr($asistencia->user->name, 0, 1))); ?>
 
                                     </div>
                                     <div>
-                                        <a href="<?php echo e(route('users.show', $asistencia->user)); ?>" class="font-medium text-gray-900 hover:text-blue-600">
+                                        <a href="<?php echo e(route('users.show', $asistencia->user)); ?>" class="font-medium text-gray-800 hover:text-[#A97142]">
                                             <?php echo e($asistencia->user->name); ?>
 
                                         </a>
-                                        <p class="text-xs text-gray-500"><?php echo e($asistencia->user->cargo->nombre ?? 'Sin cargo'); ?></p>
+                                        <p class="text-xs text-gray-600"><?php echo e($asistencia->user->cargo->nombre ?? 'Sin cargo'); ?></p>
                                     </div>
                                 </div>
-                                <span class="px-3 py-1 text-xs font-medium rounded-full <?php echo e($asistencia->asistio ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'); ?>">
+                                <span class="px-3 py-1 text-xs font-medium rounded-full <?php echo e($asistencia->asistio ? 'bg-amber-100 text-[#A97142]' : 'bg-red-100 text-red-800'); ?>">
                                     <?php echo e($asistencia->asistio ? 'Asistió' : 'No asistió'); ?>
 
                                 </span>
                             </div>
 
                             <div class="flex items-center justify-between">
-                                <span class="text-xs text-gray-500"><?php echo e($actividad->fecha->format('d/m/Y')); ?></span>
+                                <span class="text-xs text-gray-600"><?php echo e($actividad->fecha->format('d/m/Y')); ?></span>
 
                                 <div class="relative inline-block text-left">
                                     <button onclick="toggleDropdown('dropdown-asistencia-<?php echo e($asistencia->id); ?>')" class="p-1 rounded-full hover:bg-gray-200 transition-colors focus:outline-none">
@@ -70,7 +70,7 @@
 
                                     <div id="dropdown-asistencia-<?php echo e($asistencia->id); ?>" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50">
                                         <div class="py-1">
-                                            <a href="<?php echo e(route('asistencias.show', $asistencia)); ?>" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                                            <a href="<?php echo e(route('asistencias.show', $asistencia)); ?>" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-[#E9D8B6] hover:text-[#A97142] transition-colors">
                                                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
@@ -86,7 +86,7 @@
                 </div>
 
                 <?php if($asistenciasGrupo->isEmpty()): ?>
-                    <div class="text-center py-8 text-gray-500">
+                    <div class="text-center py-8 text-gray-600">
                         <p>No hay asistencias registradas para esta actividad</p>
                     </div>
                 <?php endif; ?>

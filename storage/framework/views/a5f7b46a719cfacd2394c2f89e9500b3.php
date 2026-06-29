@@ -48,10 +48,26 @@
                             </div>
                         </div>
                         
-                        <!-- Not Supported Message -->
+                        <!-- Not Supported Message with Manual Guide -->
                         <div id="not-supported-msg" class="hidden">
-                            <div class="text-gray-600 bg-gray-50 px-4 py-3 rounded-xl border border-gray-200">
-                                Este navegador no admite la instalación de aplicaciones.
+                            <div class="text-gray-600 bg-gray-50 px-4 py-4 rounded-xl border border-gray-200">
+                                <p class="font-semibold text-[#A97142] mb-2">Guía de instalación manual:</p>
+                                <div id="android-guide" class="hidden">
+                                    <p class="text-sm mb-2"><strong>Android (Chrome):</strong></p>
+                                    <ol class="text-sm space-y-1 list-decimal list-inside">
+                                        <li>Toca el menú ⋮ en la esquina superior derecha</li>
+                                        <li>Selecciona "Instalar aplicación" o "Agregar a la pantalla de inicio"</li>
+                                        <li>Sigue las instrucciones en pantalla</li>
+                                    </ol>
+                                </div>
+                                <div id="ios-guide" class="hidden mt-3">
+                                    <p class="text-sm mb-2"><strong>iOS (Safari):</strong></p>
+                                    <ol class="text-sm space-y-1 list-decimal list-inside">
+                                        <li>Toca el botón Compartir □ (cuadrado con flecha hacia arriba)</li>
+                                        <li>Desplázate y selecciona "Agregar a la pantalla de inicio"</li>
+                                        <li>Toca "Agregar" en la esquina superior derecha</li>
+                                    </ol>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -85,20 +101,25 @@
         <!-- Settings Options -->
         <div class="space-y-6">
             <!-- Mi Perfil -->
-            <a href="<?php echo e(route('settings.profile')); ?>" class="block bg-white rounded-2xl shadow-lg border border-[#E9D8B6] p-6 hover:shadow-xl hover:border-[#C8A26E] transition-all duration-300">
-                <div class="flex items-center gap-4">
+            <div class="bg-white rounded-2xl shadow-lg border border-[#E9D8B6] p-6 hover:shadow-xl hover:border-[#C8A26E] transition-all duration-300">
+                <div class="flex items-center gap-4 mb-4">
                     <div class="w-12 h-12 rounded-full bg-gradient-to-br from-[#C8A26E] to-[#A97142] flex items-center justify-center">
                         <span class="text-2xl">👤</span>
                     </div>
                     <div class="flex-1">
                         <h3 class="text-lg font-semibold text-[#1F2937]">Mi perfil</h3>
-                        <p class="text-gray-500 text-sm">Actualiza tu información personal</p>
+                        <p class="text-gray-500 text-sm">Gestiona tu información personal</p>
                     </div>
-                    <svg class="w-5 h-5 text-[#C8A26E]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                    </svg>
                 </div>
-            </a>
+                <div class="flex gap-3">
+                    <a href="<?php echo e(route('settings.show')); ?>" class="flex-1 bg-[#FAF8F5] border border-[#E9D8B6] text-[#A97142] px-4 py-2.5 rounded-xl hover:bg-[#E9D8B6] transition-all duration-200 font-semibold text-center">
+                        Ver perfil
+                    </a>
+                    <a href="<?php echo e(route('settings.profile')); ?>" class="flex-1 bg-gradient-to-r from-[#C8A26E] to-[#A97142] text-white px-4 py-2.5 rounded-xl hover:shadow-lg transition-all duration-200 font-semibold text-center">
+                        Editar perfil
+                    </a>
+                </div>
+            </div>
             
             <!-- Cambiar Contraseña -->
             <a href="<?php echo e(route('settings.password')); ?>" class="block bg-white rounded-2xl shadow-lg border border-[#E9D8B6] p-6 hover:shadow-xl hover:border-[#C8A26E] transition-all duration-300">
@@ -160,6 +181,12 @@ const installButtonContainer = document.getElementById('install-button-container
 const installButton = document.getElementById('pwa-install-btn');
 const alreadyInstalledMsg = document.getElementById('already-installed-msg');
 const notSupportedMsg = document.getElementById('not-supported-msg');
+const androidGuide = document.getElementById('android-guide');
+const iosGuide = document.getElementById('ios-guide');
+
+// Detect device type
+const isAndroid = () => /Android/i.test(navigator.userAgent);
+const isIOS = () => /iPhone|iPad|iPod/i.test(navigator.userAgent);
 
 // Check if PWA is already installed
 const isPWAInstalled = () => {
@@ -170,23 +197,37 @@ const isPWAInstalled = () => {
 
 // Initialize PWA UI
 const initializePWAUI = () => {
+    console.log('Initializing PWA UI...');
+    
     if (isPWAInstalled()) {
+        console.log('PWA is already installed');
         installButtonContainer.classList.add('hidden');
         alreadyInstalledMsg.classList.remove('hidden');
         notSupportedMsg.classList.add('hidden');
         return;
     }
     
-    // Check if browser supports PWA
-    if (!('serviceWorker' in navigator) || !('beforeinstallprompt' in window)) {
-        installButtonContainer.classList.add('hidden');
-        alreadyInstalledMsg.classList.add('hidden');
-        notSupportedMsg.classList.remove('hidden');
-        return;
+    // Show device-specific guide
+    if (isAndroid()) {
+        androidGuide.classList.remove('hidden');
+        iosGuide.classList.add('hidden');
+    } else if (isIOS()) {
+        iosGuide.classList.remove('hidden');
+        androidGuide.classList.add('hidden');
+    } else {
+        // Show both guides for desktop
+        androidGuide.classList.remove('hidden');
+        iosGuide.classList.remove('hidden');
     }
     
-    // Listen for beforeinstallprompt event
+    // Check if browser supports PWA install prompt
+    if ('serviceWorker' in navigator) {
+        console.log('Service Worker is supported');
+    }
+    
+    // Listen for beforeinstallprompt event (only fires on certain browsers)
     window.addEventListener('beforeinstallprompt', (e) => {
+        console.log('beforeinstallprompt event fired');
         e.preventDefault();
         deferredPrompt = e;
         installButtonContainer.classList.remove('hidden');
@@ -201,13 +242,25 @@ const initializePWAUI = () => {
         alreadyInstalledMsg.classList.remove('hidden');
         notSupportedMsg.classList.add('hidden');
         deferredPrompt = null;
+        showToast('¡Aplicación instalada exitosamente! 🎉', 'success');
     });
+    
+    // If we don't get the beforeinstallprompt within 2 seconds, show manual guide
+    setTimeout(() => {
+        if (!deferredPrompt) {
+            console.log('No beforeinstallprompt event, showing manual guide');
+            installButtonContainer.classList.add('hidden');
+            alreadyInstalledMsg.classList.add('hidden');
+            notSupportedMsg.classList.remove('hidden');
+        }
+    }, 2000);
 };
 
 // Handle install button click
 if (installButton) {
     installButton.addEventListener('click', async () => {
         if (!deferredPrompt) {
+            console.log('No deferred prompt available');
             return;
         }
         
@@ -219,6 +272,7 @@ if (installButton) {
             console.log('User accepted the install prompt');
             installButtonContainer.classList.add('hidden');
             alreadyInstalledMsg.classList.remove('hidden');
+            showToast('¡Aplicación instalada exitosamente! 🎉', 'success');
         } else {
             console.log('User dismissed the install prompt');
         }

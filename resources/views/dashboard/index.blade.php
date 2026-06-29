@@ -44,10 +44,10 @@
             </div>
         </div>
 
-        <div class="bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-2xl shadow-lg p-4 md:p-6 text-white transition-all duration-300 hover:shadow-xl hover:-translate-y-1 active:scale-95">
+        <div class="bg-gradient-to-br from-[#A97142] to-[#C8A26E] rounded-2xl shadow-lg p-4 md:p-6 text-white transition-all duration-300 hover:shadow-xl hover:-translate-y-1 active:scale-95">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-xs md:text-sm text-emerald-100">Finalizadas</p>
+                    <p class="text-xs md:text-sm text-[#E9D8B6]">Finalizadas</p>
                     <p class="text-2xl md:text-3xl font-bold mt-0.5">{{ $actividadesFinalizadas ?? 0 }}</p>
                 </div>
                 <div class="bg-white/20 p-2 md:p-3 rounded-xl shrink-0">
@@ -58,15 +58,15 @@
             </div>
         </div>
 
-        <div class="bg-gradient-to-br from-purple-400 to-purple-600 rounded-2xl shadow-lg p-4 md:p-6 text-white transition-all duration-300 hover:shadow-xl hover:-translate-y-1 active:scale-95">
+        <div class="bg-gradient-to-br from-[#E9D8B6] to-[#FAF8F5] rounded-2xl shadow-lg p-4 md:p-6 text-[#1F2937] transition-all duration-300 hover:shadow-xl hover:-translate-y-1 active:scale-95">
             <div class="flex items-center justify-between">
                 <div>
-                    <p class="text-xs md:text-sm text-purple-100">Usuarios Activos</p>
+                    <p class="text-xs md:text-sm text-[#A97142]">Usuarios Activos</p>
                     <p class="text-2xl md:text-3xl font-bold mt-0.5">{{ $totalUsuarios ?? 0 }}</p>
                 </div>
-                <div class="bg-white/20 p-2 md:p-3 rounded-xl shrink-0">
-                    <svg class="w-5 h-5 md:w-8 md:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                <div class="bg-white/50 p-2 md:p-3 rounded-xl shrink-0">
+                    <svg class="w-5 h-5 md:w-8 md:h-8 text-[#A97142]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 0 0112 0v1zm0 0h6v-1a6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
                     </svg>
                 </div>
             </div>
@@ -107,7 +107,7 @@
                                     ? 'bg-[#E9D8B6] text-[#A97142]'
                                     : ($evento->estado === 'en_proceso'
                                         ? 'bg-[#C8A26E]/20 text-[#A97142]'
-                                        : 'bg-emerald-100 text-emerald-800') }}">
+                                        : 'bg-[#E9D8B6] text-[#A97142]') }}">
                                 {{ ucfirst(str_replace('_', ' ', $evento->estado)) }}
                             </span>
                         </div>

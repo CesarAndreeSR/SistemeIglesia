@@ -6,7 +6,7 @@
 <div class="space-y-4 md:space-y-6 animate-fade-in">
 
     <!-- Header -->
-    <div class="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl shadow-lg p-5 md:p-8">
+    <div class="bg-gradient-to-r from-[#C8A26E] to-[#A97142] rounded-2xl shadow-lg p-5 md:p-8">
         <div class="flex items-center justify-between">
             <div class="flex items-center gap-3 md:gap-4">
                 <div class="bg-white/20 p-2.5 md:p-3 rounded-xl backdrop-blur-sm shrink-0">
@@ -17,7 +17,7 @@
                 </div>
                 <div>
                     <h1 class="text-xl md:text-3xl font-bold text-white leading-tight">Cargos</h1>
-                    <p class="text-blue-100 text-xs md:text-base mt-0.5">Gestión de cargos de la iglesia</p>
+                    <p class="text-[#E9D8B6] text-xs md:text-base mt-0.5">Gestión de cargos de la iglesia</p>
                 </div>
             </div>
             <a href="{{ route('cargos.create') }}"
@@ -34,11 +34,11 @@
     <!-- Vista móvil: tarjetas -->
     <div class="md:hidden space-y-3">
         @foreach($cargos as $cargo)
-        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4">
+        <div class="bg-white rounded-xl shadow-sm border border-[#E9D8B6] p-4">
             <div class="flex items-start justify-between gap-3">
                 <!-- Icono + nombre -->
                 <div class="flex items-center gap-3 min-w-0">
-                    <div class="bg-blue-100 text-blue-700 rounded-xl w-10 h-10 flex items-center justify-center shrink-0">
+                    <div class="bg-[#E9D8B6] text-[#A97142] rounded-xl w-10 h-10 flex items-center justify-center shrink-0">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
@@ -53,19 +53,19 @@
                 </div>
 
                 <!-- Badge usuarios -->
-                <span class="shrink-0 px-2.5 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full">
+                <span class="shrink-0 px-2.5 py-1 text-xs font-medium bg-[#E9D8B6] text-[#A97142] rounded-full">
                     {{ $cargo->users_count }} usuarios
                 </span>
             </div>
 
             <!-- Acciones -->
-            <div class="mt-3 pt-3 border-t border-gray-100 flex items-center gap-2">
+            <div class="mt-3 pt-3 border-t border-[#E9D8B6] flex items-center gap-2">
                 <a href="{{ route('cargos.show', $cargo) }}"
-                    class="flex-1 text-center py-2 text-xs font-medium text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-lg transition">
+                    class="flex-1 text-center py-2 text-xs font-medium text-[#C8A26E] bg-[#FAF8F5] hover:bg-[#E9D8B6] rounded-lg transition">
                     Ver
                 </a>
                 <a href="{{ route('cargos.edit', $cargo) }}"
-                    class="flex-1 text-center py-2 text-xs font-medium text-indigo-600 bg-indigo-50 hover:bg-indigo-100 rounded-lg transition">
+                    class="flex-1 text-center py-2 text-xs font-medium text-[#A97142] bg-[#FAF8F5] hover:bg-[#E9D8B6] rounded-lg transition">
                     Editar
                 </a>
                 <form action="{{ route('cargos.destroy', $cargo) }}" method="POST"
@@ -81,7 +81,7 @@
         @endforeach
 
         @if($cargos->isEmpty())
-        <div class="text-center py-12 bg-white rounded-xl">
+        <div class="text-center py-12 bg-white rounded-xl border border-[#E9D8B6]">
             <svg class="w-12 h-12 mx-auto text-gray-300 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                     d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
@@ -92,22 +92,22 @@
     </div>
 
     <!-- Vista desktop: tabla -->
-    <div class="hidden md:block bg-white rounded-2xl shadow-lg overflow-visible">
-        <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
+    <div class="hidden md:block bg-white rounded-2xl shadow-lg overflow-visible border border-[#E9D8B6]">
+        <table class="min-w-full divide-y divide-[#E9D8B6]">
+            <thead class="bg-[#FAF8F5]">
                 <tr>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nombre</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Descripción</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Usuarios</th>
-                    <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Acciones</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-[#A97142] uppercase tracking-wider">Nombre</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-[#A97142] uppercase tracking-wider">Descripción</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-[#A97142] uppercase tracking-wider">Usuarios</th>
+                    <th class="px-6 py-3 text-right text-xs font-medium text-[#A97142] uppercase tracking-wider">Acciones</th>
                 </tr>
             </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
+            <tbody class="bg-white divide-y divide-[#E9D8B6]">
                 @foreach($cargos as $cargo)
-                <tr class="hover:bg-gray-50 transition-colors">
+                <tr class="hover:bg-[#FAF8F5] transition-colors">
                     <td class="px-6 py-4 whitespace-nowrap">
                         <div class="flex items-center gap-3">
-                            <div class="bg-blue-100 text-blue-700 rounded-lg w-8 h-8 flex items-center justify-center shrink-0">
+                            <div class="bg-[#E9D8B6] text-[#A97142] rounded-lg w-8 h-8 flex items-center justify-center shrink-0">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
@@ -120,24 +120,24 @@
                         <span class="text-sm text-gray-500">{{ $cargo->descripcion ?? '-' }}</span>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
-                        <span class="px-2.5 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full">
+                        <span class="px-2.5 py-1 text-xs font-medium bg-[#E9D8B6] text-[#A97142] rounded-full">
                             {{ $cargo->users_count }} usuarios
                         </span>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium relative">
                         <div class="relative inline-block text-left">
                             <button onclick="toggleDropdown('dropdown-cargo-{{ $cargo->id }}')"
-                                class="p-2 rounded-full hover:bg-gray-100 transition-colors focus:outline-none">
+                                class="p-2 rounded-full hover:bg-[#FAF8F5] transition-colors focus:outline-none">
                                 <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z"/>
                                 </svg>
                             </button>
                             <div id="dropdown-cargo-{{ $cargo->id }}"
-                                class="hidden absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-100 z-50">
+                                class="hidden absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-[#E9D8B6] z-50">
                                 <div class="py-1">
                                     <a href="{{ route('cargos.show', $cargo) }}"
-                                        class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors">
+                                        class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-[#FAF8F5] hover:text-[#C8A26E] transition-colors">
                                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
@@ -145,7 +145,7 @@
                                         Ver
                                     </a>
                                     <a href="{{ route('cargos.edit', $cargo) }}"
-                                        class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-600 transition-colors">
+                                        class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-[#FAF8F5] hover:text-[#A97142] transition-colors">
                                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                                         </svg>

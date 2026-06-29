@@ -1,18 +1,30 @@
 <?php $__env->startSection('title', 'Ver Actividad'); ?>
 
 <?php $__env->startSection('content'); ?>
-<div class="space-y-6">
-    <div class="flex items-center justify-between">
-        <h1 class="text-3xl font-bold text-gray-900">Detalle de la Actividad</h1>
-        <div class="space-x-3">
-            <a href="<?php echo e(route('actividades.edit', ['actividad' => $actividad->id])); ?>" class="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition">
-                Editar
-            </a>
-            <a href="<?php echo e(route('actividades.index')); ?>" class="text-blue-600 hover:text-blue-900">Volver</a>
+<div class="space-y-6 animate-fade-in">
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-[#C8A26E] to-[#A97142] rounded-2xl shadow-lg p-5 md:p-8">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3 md:gap-4">
+                <div class="bg-white/20 p-2.5 md:p-3 rounded-xl backdrop-blur-sm shrink-0">
+                    <svg class="w-6 h-6 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-3xl font-bold text-white leading-tight">Detalle de la Actividad</h1>
+                </div>
+            </div>
+            <div class="flex gap-3">
+                <a href="<?php echo e(route('actividades.edit', ['actividad' => $actividad->id])); ?>" class="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-xl backdrop-blur-sm transition">
+                    Editar
+                </a>
+                <a href="<?php echo e(route('actividades.index')); ?>" class="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-xl backdrop-blur-sm transition">Volver</a>
+            </div>
         </div>
     </div>
 
-    <div class="bg-white rounded-lg shadow-md p-6">
+    <div class="bg-white rounded-2xl shadow-md p-6 border border-[#E9D8B6]">
         <div class="space-y-4">
             <div>
                 <label class="block text-sm font-medium text-gray-500">Título</label>
@@ -38,7 +50,7 @@
             </div>
             <div>
                 <label class="block text-sm font-medium text-gray-500">Estado</label>
-                <span class="px-3 py-1 text-xs font-medium rounded-full <?php echo e($actividad->estado === 'pendiente' ? 'bg-yellow-100 text-yellow-800' : ($actividad->estado === 'en_proceso' ? 'bg-blue-100 text-blue-800' : 'bg-green-100 text-green-800')); ?>">
+                <span class="px-3 py-1 text-xs font-medium rounded-full <?php echo e($actividad->estado === 'pendiente' ? 'bg-[#E9D8B6] text-[#A97142]' : ($actividad->estado === 'en_proceso' ? 'bg-[#C8A26E] text-white' : 'bg-[#E9D8B6] text-[#A97142]')); ?>">
                     <?php echo e(ucfirst(str_replace('_', ' ', $actividad->estado))); ?>
 
                 </span>
@@ -50,18 +62,24 @@
         </div>
     </div>
 
-    <div class="bg-white rounded-lg shadow-md p-6">
+    <div class="bg-white rounded-2xl shadow-md p-6 border border-[#E9D8B6]">
         <h2 class="text-xl font-bold text-gray-900 mb-4">Responsables</h2>
         <?php if($actividad->responsables->count() > 0): ?>
             <div class="space-y-3">
                 <?php $__currentLoopData = $actividad->responsables; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $responsable): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <a href="<?php echo e(route('users.show', $responsable)); ?>" class="block p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition">
+                    <a href="<?php echo e(route('users.show', $responsable)); ?>" class="block p-4 bg-[#FAF8F5] rounded-xl hover:bg-[#E9D8B6] transition border border-[#E9D8B6]">
                         <div class="flex items-center justify-between">
-                            <div>
-                                <h3 class="font-semibold text-gray-900"><?php echo e($responsable->name); ?></h3>
-                                <p class="text-sm text-gray-600"><?php echo e($responsable->email); ?></p>
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 bg-gradient-to-br from-[#C8A26E] to-[#A97142] rounded-full flex items-center justify-center text-white font-bold text-xs">
+                                    <?php echo e(strtoupper(substr($responsable->name, 0, 1))); ?>
+
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-gray-900"><?php echo e($responsable->name); ?></h3>
+                                    <p class="text-sm text-gray-600"><?php echo e($responsable->email); ?></p>
+                                </div>
                             </div>
-                            <span class="px-3 py-1 text-xs font-medium rounded-full <?php echo e($responsable->estado ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'); ?>">
+                            <span class="px-3 py-1 text-xs font-medium rounded-full <?php echo e($responsable->estado ? 'bg-[#E9D8B6] text-[#A97142]' : 'bg-red-100 text-red-800'); ?>">
                                 <?php echo e($responsable->estado ? 'Activo' : 'Inactivo'); ?>
 
                             </span>
@@ -75,24 +93,24 @@
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div class="bg-white rounded-lg shadow-md p-6">
+        <div class="bg-white rounded-2xl shadow-md p-6 border border-[#E9D8B6]">
             <div class="flex items-center justify-between mb-4">
                 <h2 class="text-xl font-bold text-gray-900">Evidencias</h2>
-                <a href="<?php echo e(route('evidencias.create', $actividad->id)); ?>" class="text-blue-600 hover:text-blue-900 text-sm">
+                <a href="<?php echo e(route('evidencias.create', $actividad->id)); ?>" class="text-[#C8A26E] hover:text-[#A97142] text-sm">
                     + Subir evidencia
                 </a>
             </div>
             <?php if($actividad->evidencias->count() > 0): ?>
                 <div class="space-y-3">
                     <?php $__currentLoopData = $actividad->evidencias; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $evidencia): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <div class="p-4 bg-gray-50 rounded-lg">
+                        <div class="p-4 bg-[#FAF8F5] rounded-xl border border-[#E9D8B6]">
                             <div class="flex items-center justify-between">
                                 <div>
                                     <h3 class="font-semibold text-gray-900"><?php echo e($evidencia->tipo === 'imagen' ? 'Imagen' : 'PDF'); ?></h3>
                                     <p class="text-sm text-gray-600"><?php echo e($evidencia->descripcion ?? 'Sin descripción'); ?></p>
                                 </div>
                                 <div class="space-x-2">
-                                    <a href="<?php echo e(route('evidencias.download', $evidencia)); ?>" class="text-blue-600 hover:text-blue-900 text-sm">Descargar</a>
+                                    <a href="<?php echo e(route('evidencias.download', $evidencia)); ?>" class="text-[#C8A26E] hover:text-[#A97142] text-sm">Descargar</a>
                                     <form action="<?php echo e(route('evidencias.destroy', $evidencia)); ?>" method="POST" class="inline" onsubmit="return confirm('¿Eliminar evidencia?');">
                                         <?php echo csrf_field(); ?>
                                         <?php echo method_field('DELETE'); ?>
@@ -108,23 +126,29 @@
             <?php endif; ?>
         </div>
 
-        <div class="bg-white rounded-lg shadow-md p-6">
+        <div class="bg-white rounded-2xl shadow-md p-6 border border-[#E9D8B6]">
             <div class="flex items-center justify-between mb-4">
                 <h2 class="text-xl font-bold text-gray-900">Asistencia</h2>
-                <a href="<?php echo e(route('asistencias.edit', $actividad->id)); ?>" class="text-blue-600 hover:text-blue-900 text-sm">
+                <a href="<?php echo e(route('asistencias.edit', $actividad->id)); ?>" class="text-[#C8A26E] hover:text-[#A97142] text-sm">
                     Gestionar asistencia
                 </a>
             </div>
             <?php if($actividad->asistencias->count() > 0): ?>
                 <div class="space-y-3">
                     <?php $__currentLoopData = $actividad->asistencias; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $asistencia): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <div class="p-4 bg-gray-50 rounded-lg">
+                        <div class="p-4 bg-[#FAF8F5] rounded-xl border border-[#E9D8B6]">
                             <div class="flex items-center justify-between">
-                                <div>
-                                    <h3 class="font-semibold text-gray-900"><?php echo e($asistencia->user->name); ?></h3>
-                                    <p class="text-sm text-gray-600"><?php echo e($asistencia->user->email); ?></p>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-8 h-8 bg-gradient-to-br from-[#C8A26E] to-[#A97142] rounded-full flex items-center justify-center text-white font-bold text-xs">
+                                        <?php echo e(strtoupper(substr($asistencia->user->name, 0, 1))); ?>
+
+                                    </div>
+                                    <div>
+                                        <h3 class="font-semibold text-gray-900"><?php echo e($asistencia->user->name); ?></h3>
+                                        <p class="text-sm text-gray-600"><?php echo e($asistencia->user->email); ?></p>
+                                    </div>
                                 </div>
-                                <span class="px-3 py-1 text-xs font-medium rounded-full <?php echo e($asistencia->asistio ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'); ?>">
+                                <span class="px-3 py-1 text-xs font-medium rounded-full <?php echo e($asistencia->asistio ? 'bg-[#E9D8B6] text-[#A97142]' : 'bg-red-100 text-red-800'); ?>">
                                     <?php echo e($asistencia->asistio ? 'Asistió' : 'No asistió'); ?>
 
                                 </span>
@@ -138,18 +162,18 @@
         </div>
     </div>
 
-    <div class="bg-white rounded-lg shadow-md p-6">
+    <div class="bg-white rounded-2xl shadow-md p-6 border border-[#E9D8B6]">
         <h2 class="text-xl font-bold text-gray-900 mb-4">Cambiar Estado</h2>
         <form action="<?php echo e(route('actividades.update-estado', $actividad)); ?>" method="POST">
             <?php echo csrf_field(); ?>
             <?php echo method_field('PATCH'); ?>
             <div class="flex items-center space-x-4">
-                <select name="estado" required class="rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
+                <select name="estado" required class="rounded-xl border-[#E9D8B6] shadow-sm focus:border-[#C8A26E] focus:ring-[#C8A26E]">
                     <option value="pendiente" <?php echo e($actividad->estado === 'pendiente' ? 'selected' : ''); ?>>Pendiente</option>
                     <option value="en_proceso" <?php echo e($actividad->estado === 'en_proceso' ? 'selected' : ''); ?>>En Proceso</option>
                     <option value="finalizado" <?php echo e($actividad->estado === 'finalizado' ? 'selected' : ''); ?>>Finalizado</option>
                 </select>
-                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                <button type="submit" class="px-4 py-2 bg-gradient-to-r from-[#C8A26E] to-[#A97142] text-white rounded-xl hover:from-[#A97142] hover:to-[#C8A26E] transition">
                     Actualizar Estado
                 </button>
             </div>

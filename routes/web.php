@@ -58,6 +58,7 @@ Route::middleware([
     // Settings Routes
     Route::prefix('ajustes')->group(function () {
         Route::get('/', [SettingsController::class, 'index'])->name('settings.index');
+        Route::get('/mi-perfil', [SettingsController::class, 'showProfile'])->name('settings.show');
         Route::get('/perfil', [SettingsController::class, 'profile'])->name('settings.profile');
         Route::post('/perfil', [SettingsController::class, 'updateProfile'])->name('settings.profile.update');
         Route::get('/contrasena', [SettingsController::class, 'password'])->name('settings.password');

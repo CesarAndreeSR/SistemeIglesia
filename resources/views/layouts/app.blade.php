@@ -15,7 +15,14 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="San Marteen">
-    <link rel="apple-touch-icon" href="{{ asset('images/pwa/icon-192x192.png') }}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('images/pwa/icon-72x72.png') }}">
+    <link rel="apple-touch-icon" sizes="96x96" href="{{ asset('images/pwa/icon-96x96.png') }}">
+    <link rel="apple-touch-icon" sizes="128x128" href="{{ asset('images/pwa/icon-128x128.png') }}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ asset('images/pwa/icon-144x144.png') }}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{{ asset('images/pwa/icon-152x152.png') }}">
+    <link rel="apple-touch-icon" sizes="192x192" href="{{ asset('images/pwa/icon-192x192.png') }}">
+    <link rel="apple-touch-icon" sizes="384x384" href="{{ asset('images/pwa/icon-384x384.png') }}">
+    <link rel="apple-touch-icon" sizes="512x512" href="{{ asset('images/pwa/icon-512x512.png') }}">
     
     <!-- PWA Theme Color -->
     <meta name="theme-color" content="#C8A26E">
@@ -57,6 +64,9 @@
 
 <body class="bg-[#FAF8F5] font-['Poppins']">
 
+<!-- Toast Notification Container - Global -->
+<div id="toast-container" class="fixed top-4 right-4 z-[9999] space-y-3"></div>
+
 <div class="flex h-screen overflow-hidden">
     @include('layouts.sidebar')
 
@@ -70,6 +80,55 @@
 </div>
 
 @stack('scripts')
+
+<!-- Global Toast Notification System -->
+<script>
+function showToast(message, type = 'success') {
+    const container = document.getElementById('toast-container');
+    
+    // Create toast element
+    const toast = document.createElement('div');
+    const bgColor = type === 'success' ? 'bg-gradient-to-r from-[#C8A26E] to-[#A97142]' : 'bg-red-500';
+    
+    toast.className = `${bgColor} text-white px-6 py-4 rounded-xl shadow-2xl transform translate-x-full transition-all duration-500 flex items-center gap-3 max-w-md`;
+    
+    const icon = type === 'success' 
+        ? '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>'
+        : '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>';
+    
+    toast.innerHTML = `
+        ${icon}
+        <span class="font-semibold">${message}</span>
+    `;
+    
+    container.appendChild(toast);
+    
+    // Animate in
+    setTimeout(() => toast.classList.remove('translate-x-full'), 10);
+    
+    // Animate out after 5 seconds
+    setTimeout(() => {
+        toast.classList.add('translate-x-full', 'opacity-0');
+        setTimeout(() => toast.remove(), 500);
+    }, 5000);
+}
+
+// Show toast if there's a session success message
+@if(session('success'))
+    setTimeout(() => {
+        showToast('{{ session('success') }}', 'success');
+    }, 100);
+@endif
+
+// Show toasts for validation errors
+@if($errors->any())
+    setTimeout(() => {
+        @foreach($errors->all() as $error)
+            showToast('{{ $error }}', 'error');
+        @endforeach
+    }, 100);
+@endif
+</script>
 
 <script>
 @if(auth()->check())
